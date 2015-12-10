@@ -19,190 +19,102 @@
 			<div id="cube">
 			<!-- TOP FACE -->
 				<!-- LEFT COL -->
-				<div class="square tul">
+				<square ng-repeat="row in square_row" class="top_face left_col" ng-class="square_row[$index]">
+					{{square_row[$index]}}
+				</square>
 				
-				</div>
-				<div class="square tcl">
-				
-				</div>
-				<div class="square tll">
-				
-				</div>
 				<!-- MIDDLE COL -->
-				<div class="square tum">
+				<square ng-repeat="row in square_row" class="top_face middle_col" 
+				ng-class='square_row[$index]' 
+				ng-if="if ($index !== 1 || 3) square_row[$index] += ' center'">
+					{{square_row[$index]}}
+				</square>
 				
-				</div>
-				<div class="square tcm center">
-				
-				</div>
-				<div class="square tlm">
-				
-				</div>
 				<!-- RIGHT COL -->
-				<div class="square tur">
-				
-				</div>
-				<div class="square tcr">
-				
-				</div>
-				<div class="square tlr">
-				
-				</div>
+				<square ng-repeat="row in square_row" class="top_face right_col" ng-class="square_row[$index]">
+					{{square_row[$index]}}
+				</square>
+
 			<!-- FRONT FACE -->
 				<!-- LEFT COL -->
-				<div class="square ful">
+				<square ng-repeat="row in square_row" class="front_face left_col" ng-class="square_row[$index]">
+					{{square_row[$index]}}
+				</square>
 				
-				</div>
-				<div class="square fcl">
-				
-				</div>
-				<div class="square fll">
-				
-				</div>
 				<!-- MIDDLE COL -->
-				<div class="square fum">
+				<square ng-repeat="row in square_row" class="front_face middle_col" ng-class="square_row[$index]">
+					{{square_row[$index]}}
+				</square>
 				
-				</div>
-				<div class="square fcm center">
-				
-				</div>
-				<div class="square flm">
-				
-				</div>
 				<!-- RIGHT COL -->
-				<div class="square fur">
-				
-				</div>
-				<div class="square fcr">
-				
-				</div>
-				<div class="square flr">
-				
-				</div>
+				<square ng-repeat="row in square_row" class="front_face right_col" ng-class="square_row[$index]">
+					{{square_row[$index]}}
+				</square>
+
 			<!-- DOWN FACE (lower & bottom would --> 
 				<!-- LEFT COL -->
-				<div class="square dul">
+				<square ng-repeat="row in square_row" class="down_face left_col" ng-class="square_row[$index]">
+					{{square_row[$index]}}
+				</square>
 				
-				</div>
-				<div class="square dcl">
-				
-				</div>
-				<div class="square dll">
-				
-				</div>
 				<!-- MIDDLE COL -->
-				<div class="square dum">
+				<square ng-repeat="row in square_row" class="down_face middle_col" ng-class="square_row[$index]">
+					{{square_row[$index]}}
+				</square>
 				
-				</div>
-				<div class="square dcm center">
-				
-				</div>
-				<div class="square dlm">
-				
-				</div>
 				<!-- RIGHT COL -->
-				<div class="square dur">
-				
-				</div>
-				<div class="square dcr">
-				
-				</div>
-				<div class="square dlr">
-				
-				</div>
+				<square ng-repeat="row in square_row" class="down_face right_col" ng-class="square_row[$index]">
+					{{square_row[$index]}}
+				</square>
+
 			<!-- BACK FACE -->
 				<!-- LEFT COL -->
-				<div class="square bul">
+				<square ng-repeat="row in square_row" class="back_face left_col" ng-class="square_row[$index]">
+					{{square_row[$index]}}
+				</square>
 				
-				</div>
-				<div class="square bcl">
-				
-				</div>
-				<div class="square bll">
-				
-				</div>
 				<!-- MIDDLE COL -->
-				<div class="square bum">
+				<square ng-repeat="row in square_row" class="back_face middle_col" ng-class="square_row[$index]">
+					{{square_row[$index]}}
+				</square>
 				
-				</div>
-				<div class="square bcm center">
-				
-				</div>
-				<div class="square blm">
-				
-				</div>
 				<!-- RIGHT COL -->
-				<div class="square bur">
-				
-				</div>
-				<div class="square bcr">
-				
-				</div>
-				<div class="square blr">
-				
-				</div>
+				<square ng-repeat="row in square_row" class="back_face right_col" ng-class="square_row[$index]">
+					{{square_row[$index]}}
+				</square>
+
 			<!--LEFT FACE -->
 				<!-- LEFT COL -->
-				<div class="square lul">
+				<square ng-repeat="row in square_row" class="left_face left_col" ng-class="square_row[$index]">
+					{{square_row[$index]}}
+				</square>
 				
-				</div>
-				<div class="square lcl">
-				
-				</div>
-				<div class="square lll">
-				
-				</div>
 				<!-- MIDDLE COL -->
-				<div class="square lum">
+				<square ng-repeat="row in square_row" class="left_face middle_col" ng-class="square_row[$index]">
+					{{square_row[$index]}}
+				</square>
 				
-				</div>
-				<div class="square lcm center">
-				
-				</div>
-				<div class="square llm">
-				
-				</div>
 				<!-- RIGHT COL -->
-				<div class="square lur">
-				
-				</div>
-				<div class="square lcr">
-				
-				</div>
-				<div class="square llr">
-				
-				</div>
+				<square ng-repeat="row in square_row" class="left_face right_col" ng-class="square_row[$index]">
+					{{square_row[$index]}}
+				</square>
+
 			<!-- RIGHT FACE -->
 				<!-- LEFT COL -->
-				<div class="square rul">
+				<square ng-repeat="row in square_row" class="right_face left_col" ng-class="square_row[$index]">
+					{{square_row[$index]}}
+				</square>
 				
-				</div>
-				<div class="square rcl">
-				
-				</div>
-				<div class="square rll">
-				
-				</div>
 				<!-- MIDDLE COL -->
-				<div class="square rum">
+				<square ng-repeat="row in square_row" class="right_face middle_col" ng-class="square_row[$index]">
+					{{square_row[$index]}}
+				</square>
 				
-				</div>
-				<div class="square rcm center">
-				
-				</div>
-				<div class="square rlm">
-				
-				</div>
 				<!-- RIGHT COL -->
-				<div class="square rur">
-				
-				</div>
-				<div class="square rcr">
-				
-				</div>
-				<div class="square rlr">
-				
-				</div>	
+				<square ng-repeat="row in square_row" class="right_face right_col" ng-class="square_row[$index]">
+					{{square_row[$index]}}
+				</square>
+
 			</div>
 		</div>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.8/angular.min.js"></script>
