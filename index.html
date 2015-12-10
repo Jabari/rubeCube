@@ -1,0 +1,211 @@
+<!doctype html>
+<html>
+	<head>
+		<link rel="stylesheet" href="css/style.css" />
+	</head>
+	<body ng-app="rubeCube" ng-controller="sizeGen">
+		<div id="controls">
+			<h1>A rubik's cube generator</h1>
+			<div id="size_gen">
+				<button ng-click="dec()" class="button round">-</button>
+				{{size}}
+				<button ng-click="inc()" class="button round">+</button>				
+			</div>
+			<div ng-controller="colorGen" id="">
+				<button class="button">Change color</button>
+			</div>
+		</div>
+		<div id="cube-viewport">
+			<div id="cube">
+			<!-- TOP FACE -->
+				<!-- LEFT COL -->
+				<div class="square tul">
+				
+				</div>
+				<div class="square tcl">
+				
+				</div>
+				<div class="square tll">
+				
+				</div>
+				<!-- MIDDLE COL -->
+				<div class="square tum">
+				
+				</div>
+				<div class="square tcm center">
+				
+				</div>
+				<div class="square tlm">
+				
+				</div>
+				<!-- RIGHT COL -->
+				<div class="square tur">
+				
+				</div>
+				<div class="square tcr">
+				
+				</div>
+				<div class="square tlr">
+				
+				</div>
+			<!-- FRONT FACE -->
+				<!-- LEFT COL -->
+				<div class="square ful">
+				
+				</div>
+				<div class="square fcl">
+				
+				</div>
+				<div class="square fll">
+				
+				</div>
+				<!-- MIDDLE COL -->
+				<div class="square fum">
+				
+				</div>
+				<div class="square fcm center">
+				
+				</div>
+				<div class="square flm">
+				
+				</div>
+				<!-- RIGHT COL -->
+				<div class="square fur">
+				
+				</div>
+				<div class="square fcr">
+				
+				</div>
+				<div class="square flr">
+				
+				</div>
+			<!-- DOWN FACE (lower & bottom would --> 
+				<!-- LEFT COL -->
+				<div class="square dul">
+				
+				</div>
+				<div class="square dcl">
+				
+				</div>
+				<div class="square dll">
+				
+				</div>
+				<!-- MIDDLE COL -->
+				<div class="square dum">
+				
+				</div>
+				<div class="square dcm center">
+				
+				</div>
+				<div class="square dlm">
+				
+				</div>
+				<!-- RIGHT COL -->
+				<div class="square dur">
+				
+				</div>
+				<div class="square dcr">
+				
+				</div>
+				<div class="square dlr">
+				
+				</div>
+			<!-- BACK FACE -->
+				<!-- LEFT COL -->
+				<div class="square bul">
+				
+				</div>
+				<div class="square bcl">
+				
+				</div>
+				<div class="square bll">
+				
+				</div>
+				<!-- MIDDLE COL -->
+				<div class="square bum">
+				
+				</div>
+				<div class="square bcm center">
+				
+				</div>
+				<div class="square blm">
+				
+				</div>
+				<!-- RIGHT COL -->
+				<div class="square bur">
+				
+				</div>
+				<div class="square bcr">
+				
+				</div>
+				<div class="square blr">
+				
+				</div>
+			<!--LEFT FACE -->
+				<!-- LEFT COL -->
+				<div class="square lul">
+				
+				</div>
+				<div class="square lcl">
+				
+				</div>
+				<div class="square lll">
+				
+				</div>
+				<!-- MIDDLE COL -->
+				<div class="square lum">
+				
+				</div>
+				<div class="square lcm center">
+				
+				</div>
+				<div class="square llm">
+				
+				</div>
+				<!-- RIGHT COL -->
+				<div class="square lur">
+				
+				</div>
+				<div class="square lcr">
+				
+				</div>
+				<div class="square llr">
+				
+				</div>
+			<!-- RIGHT FACE -->
+				<!-- LEFT COL -->
+				<div class="square rul">
+				
+				</div>
+				<div class="square rcl">
+				
+				</div>
+				<div class="square rll">
+				
+				</div>
+				<!-- MIDDLE COL -->
+				<div class="square rum">
+				
+				</div>
+				<div class="square rcm center">
+				
+				</div>
+				<div class="square rlm">
+				
+				</div>
+				<!-- RIGHT COL -->
+				<div class="square rur">
+				
+				</div>
+				<div class="square rcr">
+				
+				</div>
+				<div class="square rlr">
+				
+				</div>	
+			</div>
+		</div>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.8/angular.min.js"></script>
+		<script src="script.js"></script>
+	</body>
+</html>
