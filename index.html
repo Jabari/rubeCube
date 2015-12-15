@@ -12,24 +12,29 @@
 				<button ng-click="inc()" class="button round">+</button>				
 			</div>
 			<div ng-controller="colorGen" id="">
-				<button class="button">Change color</button>
+				<button class="button" ng-click="randomRGB()">Change color</button>
 			</div>
 		</div>
 		<div id="cube-viewport">
-			<div id="cube">
+			<div id="cube" style="-webkit-transform: rotateX(340deg) rotateY(30deg)">
 			<!-- TOP FACE -->
 				<!-- LEFT COL -->
-				<square ng-repeat="row in square_row" class="top_face left_col" ng-class="square_row[$index]">
+				<square ng-repeat="row in square_row" class="top_face left_col" ng-style="{'background': colorArr[i]}"
+				ng-class="square_row[$index]">
 					{{square_row[$index]}}
 				</square>
 				
 				<!-- MIDDLE COL -->
 				<square ng-repeat="row in square_row" class="top_face middle_col" 
-				ng-class='square_row[$index]' 
-				ng-if="if ($index !== 1 || 3) square_row[$index] += ' center'">
+				ng-class="{'upper': square_row[$index] === 'upper', 
+				'center middle': square_row[$index] === 'middle', 
+				'lower': square_row[$index] === 'lower'}">
 					{{square_row[$index]}}
 				</square>
-				
+				<!-- {class1 : expression1, class2 : expression2}
+				'foo' : someOtherVar === 'bar'
+				{'bar': someVar === 'bar', 'foo': someOtherVar === 'foo'}
+				{'class1 class2' : expression1}
 				<!-- RIGHT COL -->
 				<square ng-repeat="row in square_row" class="top_face right_col" ng-class="square_row[$index]">
 					{{square_row[$index]}}
@@ -42,7 +47,10 @@
 				</square>
 				
 				<!-- MIDDLE COL -->
-				<square ng-repeat="row in square_row" class="front_face middle_col" ng-class="square_row[$index]">
+				<square ng-repeat="row in square_row" class="front_face middle_col" 
+				ng-class="{'upper': square_row[$index] === 'upper', 
+				'center middle': square_row[$index] === 'middle', 
+				'lower': square_row[$index] === 'lower'}">
 					{{square_row[$index]}}
 				</square>
 				
@@ -53,17 +61,20 @@
 
 			<!-- DOWN FACE (lower & bottom would --> 
 				<!-- LEFT COL -->
-				<square ng-repeat="row in square_row" class="down_face left_col" ng-class="square_row[$index]">
+				<square ng-repeat="row in square_row" class="bottom_face left_col" ng-class="square_row[$index]">
 					{{square_row[$index]}}
 				</square>
 				
 				<!-- MIDDLE COL -->
-				<square ng-repeat="row in square_row" class="down_face middle_col" ng-class="square_row[$index]">
+				<square ng-repeat="row in square_row" class="bottom_face middle_col" 
+				ng-class="{'upper': square_row[$index] === 'upper', 
+				'center middle': square_row[$index] === 'middle', 
+				'lower': square_row[$index] === 'lower'}">
 					{{square_row[$index]}}
 				</square>
 				
 				<!-- RIGHT COL -->
-				<square ng-repeat="row in square_row" class="down_face right_col" ng-class="square_row[$index]">
+				<square ng-repeat="row in square_row" class="bottom_face right_col" ng-class="square_row[$index]">
 					{{square_row[$index]}}
 				</square>
 
@@ -74,7 +85,10 @@
 				</square>
 				
 				<!-- MIDDLE COL -->
-				<square ng-repeat="row in square_row" class="back_face middle_col" ng-class="square_row[$index]">
+				<square ng-repeat="row in square_row" class="back_face middle_col" 
+				ng-class="{'upper': square_row[$index] === 'upper', 
+				'center middle': square_row[$index] === 'middle', 
+				'lower': square_row[$index] === 'lower'}">
 					{{square_row[$index]}}
 				</square>
 				
@@ -90,7 +104,10 @@
 				</square>
 				
 				<!-- MIDDLE COL -->
-				<square ng-repeat="row in square_row" class="left_face middle_col" ng-class="square_row[$index]">
+				<square ng-repeat="row in square_row" class="left_face middle_col" 
+				ng-class="{'upper': square_row[$index] === 'upper', 
+				'center middle': square_row[$index] === 'middle', 
+				'lower': square_row[$index] === 'lower'}">
 					{{square_row[$index]}}
 				</square>
 				
@@ -106,7 +123,10 @@
 				</square>
 				
 				<!-- MIDDLE COL -->
-				<square ng-repeat="row in square_row" class="right_face middle_col" ng-class="square_row[$index]">
+				<square ng-repeat="row in square_row" class="right_face middle_col" 
+				ng-class="{'upper': square_row[$index] === 'upper', 
+				'center middle': square_row[$index] === 'middle', 
+				'lower': square_row[$index] === 'lower'}">
 					{{square_row[$index]}}
 				</square>
 				
