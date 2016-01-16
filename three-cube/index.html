@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>webGL</title>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r58/three.min.js"></script>
+	<script src="../js/OrbitControls.js"></script>	
+	<script src="../js/three-cube.js"></script>
+	<style>
+		body {
+			overflow-y: hidden;
+		}
+		@keyframes rotate {
+			from {
+				transform: rotate3d(0, 0, 0 0deg);
+			}
+
+			to {
+				transform: rotate3d(360, 720, 360, 360deg);
+			}
+		}
+		game {
+			//-webkit-animation-name: rotate;
+			-webkit-animation-duration: 20s;
+			-webkit-animation-iteration-count: infinite;
+			-webkit-animation-timing-function: linear;
+	    	-webkit-transform-origin: default;
+	    	backface-visibility: visible;
+	    }
+	    ul {
+	    	list-style-type: none;
+	    }
+	</style>
+</head>
+<body>
+	<button class="button" onclick="changeColor();">Change color</button>
+	<button class="button" onclick="scramble();">Scramble</button>
+	<button class="button" onclick="cube();">Init</button>
+	<!--<div>
+		<ul>
+			<li><dl><dt>f</dt>-<dd>front</dd></li>
+			<li><dl><dt>b</dt>-<dd>back</dd></li>
+			<li><dl><dt>l</dt>-<dd>left</dd></li>
+			<li><dl><dt>r</dt>-<dd>right</dd></li>
+			<li><dl><dt>u</dt>-<dd>up</dd></li>
+			<li><dl><dt>d</dt>-<dd>down</dd></li>
+			<!--<li><dl><dt>c</dt>-<dd>center</dd></li>
+			<li><dl><dt>m</dt>-<dd>middle</dd></li>-->
+		</ul>
+	</div>
+	<game>
+	</game>
+</body>
+</html>

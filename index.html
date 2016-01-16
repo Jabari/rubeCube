@@ -1,143 +1,177 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
-	<head>
-		<link rel="stylesheet" href="css/style.css" />
-	</head>
-	<body ng-app="rubeCube" ng-controller="sizeGen">
-		<div id="controls">
-			<h1>A rubik's cube generator</h1>
-			<div id="size_gen">
-				<button ng-click="dec()" class="button round">-</button>
-				{{size}}
-				<button ng-click="inc()" class="button round">+</button>				
-			</div>
-			<div ng-controller="colorGen" id="">
-				<button class="button" ng-click="randomRGB()">Change color</button>
-			</div>
-		</div>
-		<div id="cube-viewport">
-			<div id="cube" style="-webkit-transform: rotateX(340deg) rotateY(30deg)">
-			<!-- TOP FACE -->
-				<!-- LEFT COL -->
-				<square ng-repeat="row in square_row" class="top_face left_col" ng-style="{'background': colorArr[i]}"
-				ng-class="square_row[$index]">
-					{{square_row[$index]}}
-				</square>
-				
-				<!-- MIDDLE COL -->
-				<square ng-repeat="row in square_row" class="top_face middle_col" 
-				ng-class="{'upper': square_row[$index] === 'upper', 
-				'center middle': square_row[$index] === 'middle', 
-				'lower': square_row[$index] === 'lower'}">
-					{{square_row[$index]}}
-				</square>
-				<!-- {class1 : expression1, class2 : expression2}
-				'foo' : someOtherVar === 'bar'
-				{'bar': someVar === 'bar', 'foo': someOtherVar === 'foo'}
-				{'class1 class2' : expression1}
-				<!-- RIGHT COL -->
-				<square ng-repeat="row in square_row" class="top_face right_col" ng-class="square_row[$index]">
-					{{square_row[$index]}}
-				</square>
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="/css/angular-cube.css">
+	<link rel="stylesheet" type="text/css" href="/css/style.css">
+	<title>rübeCube</title>
+</head>
+<body>
+	<header>
+		<h1>rübeCube</h1>
+		<h2>Player, choose your Cube!</h2>
+	</header>
+	
+	<div class="container-fluid">
+		<div class="row container">
+			<div ng-app="rubeCube" ng-controller="sizeGen" class="container col-xs-12 col-md-12 cube-container" >
+				<div id="cube-viewport">
+					<div id="cube" style="-webkit-transform: rotateX(-15deg) rotateY(25deg)">
+					<!-- TOP FACE -->
+						<!-- LEFT COL -->
+						<square ng-repeat="row in square_row" class="top_face left_col" 				
+						ng-class="square_row[$index]" ng-swipe-up="console.log($event)"
+						ng-swipe-down="console.log('swipe')" on-swipe-left="swipe($event)" on-swipe-right="swipe($event)">
+							{{square_row[$index]}}
+						</square>
+						
+						<!-- MIDDLE COL -->
+						<square ng-repeat="row in square_row" class="top_face middle_col" 
+						ng-class="{'upper': square_row[$index] === 'upper', 
+						'center middle': square_row[$index] === 'middle', 
+						'lower': square_row[$index] === 'lower'}">
+							{{square_row[$index]}}
+						</square>
 
-			<!-- FRONT FACE -->
-				<!-- LEFT COL -->
-				<square ng-repeat="row in square_row" class="front_face left_col" ng-class="square_row[$index]">
-					{{square_row[$index]}}
-				</square>
-				
-				<!-- MIDDLE COL -->
-				<square ng-repeat="row in square_row" class="front_face middle_col" 
-				ng-class="{'upper': square_row[$index] === 'upper', 
-				'center middle': square_row[$index] === 'middle', 
-				'lower': square_row[$index] === 'lower'}">
-					{{square_row[$index]}}
-				</square>
-				
-				<!-- RIGHT COL -->
-				<square ng-repeat="row in square_row" class="front_face right_col" ng-class="square_row[$index]">
-					{{square_row[$index]}}
-				</square>
+						<!-- RIGHT COL -->
+						<square ng-repeat="row in square_row" class="top_face right_col" ng-class="square_row[$index]">
+							{{square_row[$index]}}
+						</square>
 
-			<!-- DOWN FACE (lower & bottom would --> 
-				<!-- LEFT COL -->
-				<square ng-repeat="row in square_row" class="bottom_face left_col" ng-class="square_row[$index]">
-					{{square_row[$index]}}
-				</square>
-				
-				<!-- MIDDLE COL -->
-				<square ng-repeat="row in square_row" class="bottom_face middle_col" 
-				ng-class="{'upper': square_row[$index] === 'upper', 
-				'center middle': square_row[$index] === 'middle', 
-				'lower': square_row[$index] === 'lower'}">
-					{{square_row[$index]}}
-				</square>
-				
-				<!-- RIGHT COL -->
-				<square ng-repeat="row in square_row" class="bottom_face right_col" ng-class="square_row[$index]">
-					{{square_row[$index]}}
-				</square>
+					<!-- FRONT FACE -->
+						<!-- LEFT COL -->
+						<square ng-repeat="row in square_row" class="front_face left_col" ng-class="square_row[$index]"
+						on-swipe-left="console.log('swipeleft')" on-swipe-down="onDragDown()" >
+							{{square_row[$index]}}
+						</square>
+						
+						<!-- MIDDLE COL -->
+						<square ng-repeat="row in square_row" class="front_face middle_col" 
+						ng-class="{'upper': square_row[$index] === 'upper', 
+						'center middle': square_row[$index] === 'middle', 
+						'lower': square_row[$index] === 'lower'}" ng-swipe-up="console.log($event)"
+						ng-swipe-down="console.log('swipe')">
+							{{square_row[$index]}}
+						</square>
+						
+						<!-- RIGHT COL -->
+						<square ng-repeat="row in square_row" class="front_face right_col" ng-class="square_row[$index]">
+							{{square_row[$index]}}
+						</square>
 
-			<!-- BACK FACE -->
-				<!-- LEFT COL -->
-				<square ng-repeat="row in square_row" class="back_face left_col" ng-class="square_row[$index]">
-					{{square_row[$index]}}
-				</square>
-				
-				<!-- MIDDLE COL -->
-				<square ng-repeat="row in square_row" class="back_face middle_col" 
-				ng-class="{'upper': square_row[$index] === 'upper', 
-				'center middle': square_row[$index] === 'middle', 
-				'lower': square_row[$index] === 'lower'}">
-					{{square_row[$index]}}
-				</square>
-				
-				<!-- RIGHT COL -->
-				<square ng-repeat="row in square_row" class="back_face right_col" ng-class="square_row[$index]">
-					{{square_row[$index]}}
-				</square>
+					<!-- DOWN FACE (lower & bottom would --> 
+						<!-- LEFT COL -->
+						<square ng-repeat="row in square_row" class="bottom_face left_col" ng-class="square_row[$index]">
+							{{square_row[$index]}}
+						</square>
+						
+						<!-- MIDDLE COL -->
+						<square ng-repeat="row in square_row" class="bottom_face middle_col" 
+						ng-class="{'upper': square_row[$index] === 'upper', 
+						'center middle': square_row[$index] === 'middle', 
+						'lower': square_row[$index] === 'lower'}">
+							{{square_row[$index]}}
+						</square>
+						
+						<!-- RIGHT COL -->
+						<square ng-repeat="row in square_row" class="bottom_face right_col" ng-class="square_row[$index]">
+							{{square_row[$index]}}
+						</square>
 
-			<!--LEFT FACE -->
-				<!-- LEFT COL -->
-				<square ng-repeat="row in square_row" class="left_face left_col" ng-class="square_row[$index]">
-					{{square_row[$index]}}
-				</square>
-				
-				<!-- MIDDLE COL -->
-				<square ng-repeat="row in square_row" class="left_face middle_col" 
-				ng-class="{'upper': square_row[$index] === 'upper', 
-				'center middle': square_row[$index] === 'middle', 
-				'lower': square_row[$index] === 'lower'}">
-					{{square_row[$index]}}
-				</square>
-				
-				<!-- RIGHT COL -->
-				<square ng-repeat="row in square_row" class="left_face right_col" ng-class="square_row[$index]">
-					{{square_row[$index]}}
-				</square>
+					<!-- BACK FACE -->
+						<!-- LEFT COL -->
+						<square ng-repeat="row in square_row" class="back_face left_col" ng-class="square_row[$index]">
+							{{square_row[$index]}}
+						</square>
+						
+						<!-- MIDDLE COL -->
+						<square ng-repeat="row in square_row" class="back_face middle_col" 
+						ng-class="{'upper': square_row[$index] === 'upper', 
+						'center middle': square_row[$index] === 'middle', 
+						'lower': square_row[$index] === 'lower'}">
+							{{square_row[$index]}}
+						</square>
+						
+						<!-- RIGHT COL -->
+						<square ng-repeat="row in square_row" class="back_face right_col" ng-class="square_row[$index]">
+							{{square_row[$index]}}
+						</square>
 
-			<!-- RIGHT FACE -->
-				<!-- LEFT COL -->
-				<square ng-repeat="row in square_row" class="right_face left_col" ng-class="square_row[$index]">
-					{{square_row[$index]}}
-				</square>
-				
-				<!-- MIDDLE COL -->
-				<square ng-repeat="row in square_row" class="right_face middle_col" 
-				ng-class="{'upper': square_row[$index] === 'upper', 
-				'center middle': square_row[$index] === 'middle', 
-				'lower': square_row[$index] === 'lower'}">
-					{{square_row[$index]}}
-				</square>
-				
-				<!-- RIGHT COL -->
-				<square ng-repeat="row in square_row" class="right_face right_col" ng-class="square_row[$index]">
-					{{square_row[$index]}}
-				</square>
+					<!--LEFT FACE -->
+						<!-- LEFT COL -->
+						<square ng-repeat="row in square_row" class="left_face left_col" ng-class="square_row[$index]">
+							{{square_row[$index]}}
+						</square>
+						
+						<!-- MIDDLE COL -->
+						<square ng-repeat="row in square_row" class="left_face middle_col" 
+						ng-class="{'upper': square_row[$index] === 'upper', 
+						'center middle': square_row[$index] === 'middle', 
+						'lower': square_row[$index] === 'lower'}">
+							{{square_row[$index]}}
+						</square>
+						
+						<!-- RIGHT COL -->
+						<square ng-repeat="row in square_row" class="left_face right_col" ng-class="square_row[$index]">
+							{{square_row[$index]}}
+						</square>
 
-			</div>
-		</div>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.8/angular.min.js"></script>
-		<script src="script.js"></script>
-	</body>
+					<!-- RIGHT FACE -->
+						<!-- LEFT COL -->
+						<square ng-repeat="row in square_row" class="right_face left_col" ng-class="square_row[$index]">
+							{{square_row[$index]}}
+						</square>
+						
+						<!-- MIDDLE COL -->
+						<square ng-repeat="row in square_row" class="right_face middle_col" 
+						ng-class="{'upper': square_row[$index] === 'upper', 
+						'center middle': square_row[$index] === 'middle', 
+						'lower': square_row[$index] === 'lower'}">
+							{{square_row[$index]}}
+						</square>
+						
+						<!-- RIGHT COL -->
+						<square ng-repeat="row in square_row" class="right_face right_col" ng-class="square_row[$index]">
+							{{square_row[$index]}}
+						</square>
+					</div><!--cube-->
+				</div><!--cube viewport-->
+				<script src="http://code.ionicframework.com/1.1.1/js/ionic.bundle.min.js"></script>
+				<script src="/js/angular-cube.js"></script>
+				<script src="/js/swipe.js"></script>
+				<dd><a href="/angular-cube/index.html">Vanilla - created with HTML5 & Angular</a></dd>
+			</div><!--ng-app=rubeCube-->
+			
+			<div class="container col-xs-12 col-md-12 cube-container">
+				<game>
+				</game>
+				<ul>
+					<li><dl><dt>f</dt>-<dd>front</dd></li>
+					<li><dl><dt>b</dt>-<dd>back</dd></li>
+					<li><dl><dt>l</dt>-<dd>left</dd></li>
+					<li><dl><dt>r</dt>-<dd>right</dd></li>
+					<li><dl><dt>u</dt>-<dd>up</dd></li>
+					<li><dl><dt>d</dt>-<dd>down</dd></li>
+					<!--<li><dl><dt>c</dt>-<dd>center</dd></li>
+					<li><dl><dt>m</dt>-<dd>middle</dd></li>-->
+				</ul>	
+				<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+				<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r58/three.min.js"></script>
+				<script src="../js/OrbitControls.js"></script>	
+				<script src="../js/three-cube.js"></script>
+				<dd><a href="/three-cube/index.html">Flavor of the Week - created with Three.js</a></dd>
+			</div><!--three-cube-->
+		</div><!--row-->
+	</div>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+	<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+	<script>
+	$(document).ready(function() {
+		$('canvas').width(window.innerWidth / 2);
+		$('game').width($('game').parent().width());
+		console.log($('game').width());
+	})
+	<!--<script type="text/javascript" src="/js/script.js"></script>-->
+</body>
 </html>

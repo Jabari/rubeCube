@@ -1,0 +1,161 @@
+<!doctype html>
+<html>
+	<head>
+		<link rel="stylesheet" href="css/style.css" />
+	</head>
+	<body ng-app="rubeCube" ng-controller="sizeGen">
+		<div id="controls">
+			<h1>HTML5 Rubik's Cube generator</h1>
+			<div id="size_gen">
+				<input type="text" ng-model="elem" placeholder="element" />
+				<input type="text" ng-model="prop" placeholder="property" />
+				<button ng-click="prepare()">Get Style</button>
+				{{elem}}
+
+				<button ng-click="dec()" class="button round">-</button>
+				{{size}}
+				<button ng-click="inc()" class="button round">+</button>				
+			</div>
+			<div ng-controller="colorGen" id="">
+				<button class="button" ng-click="randomColor()">Change color</button>
+			</div>
+			<p>
+	            <input type="button" value="LM">
+	            <input type="button" value="RM">
+	            <input type="button" value="FS">
+	            <input type="button" value="BS">
+	            <input type="button" value="UE">
+	            <input type="button" value="DE">
+		    </p>
+			<button ng-click="">
+		</div>
+		<div id="cube-viewport">
+			<div id="cube" style="-webkit-transform: rotateX(-15deg) rotateY(25deg)">
+			<!-- TOP FACE -->
+				<!-- LEFT COL -->
+				<square ng-repeat="row in square_row" class="top_face left_col" 				
+				ng-class="square_row[$index]" ng-swipe-up="console.log($event)"
+				ng-swipe-down="console.log('swipe')" on-swipe-left="swipe($event)" on-swipe-right="swipe($event)">
+					{{square_row[$index]}}
+				</square>
+				
+				<!-- MIDDLE COL -->
+				<square ng-repeat="row in square_row" class="top_face middle_col" 
+				ng-class="{'upper': square_row[$index] === 'upper', 
+				'center middle': square_row[$index] === 'middle', 
+				'lower': square_row[$index] === 'lower'}">
+					{{square_row[$index]}}
+				</square>
+
+				<!-- RIGHT COL -->
+				<square ng-repeat="row in square_row" class="top_face right_col" ng-class="square_row[$index]">
+					{{square_row[$index]}}
+				</square>
+
+			<!-- FRONT FACE -->
+				<!-- LEFT COL -->
+				<square ng-repeat="row in square_row" class="front_face left_col" ng-class="square_row[$index]"
+				on-swipe-left="console.log('swipeleft')" on-swipe-down="onDragDown()" >
+					{{square_row[$index]}}
+				</square>
+				
+				<!-- MIDDLE COL -->
+				<square ng-repeat="row in square_row" class="front_face middle_col" 
+				ng-class="{'upper': square_row[$index] === 'upper', 
+				'center middle': square_row[$index] === 'middle', 
+				'lower': square_row[$index] === 'lower'}" ng-swipe-up="console.log($event)"
+				ng-swipe-down="console.log('swipe')">
+					{{square_row[$index]}}
+				</square>
+				
+				<!-- RIGHT COL -->
+				<square ng-repeat="row in square_row" class="front_face right_col" ng-class="square_row[$index]">
+					{{square_row[$index]}}
+				</square>
+
+			<!-- DOWN FACE (lower & bottom would --> 
+				<!-- LEFT COL -->
+				<square ng-repeat="row in square_row" class="bottom_face left_col" ng-class="square_row[$index]">
+					{{square_row[$index]}}
+				</square>
+				
+				<!-- MIDDLE COL -->
+				<square ng-repeat="row in square_row" class="bottom_face middle_col" 
+				ng-class="{'upper': square_row[$index] === 'upper', 
+				'center middle': square_row[$index] === 'middle', 
+				'lower': square_row[$index] === 'lower'}">
+					{{square_row[$index]}}
+				</square>
+				
+				<!-- RIGHT COL -->
+				<square ng-repeat="row in square_row" class="bottom_face right_col" ng-class="square_row[$index]">
+					{{square_row[$index]}}
+				</square>
+
+			<!-- BACK FACE -->
+				<!-- LEFT COL -->
+				<square ng-repeat="row in square_row" class="back_face left_col" ng-class="square_row[$index]">
+					{{square_row[$index]}}
+				</square>
+				
+				<!-- MIDDLE COL -->
+				<square ng-repeat="row in square_row" class="back_face middle_col" 
+				ng-class="{'upper': square_row[$index] === 'upper', 
+				'center middle': square_row[$index] === 'middle', 
+				'lower': square_row[$index] === 'lower'}">
+					{{square_row[$index]}}
+				</square>
+				
+				<!-- RIGHT COL -->
+				<square ng-repeat="row in square_row" class="back_face right_col" ng-class="square_row[$index]">
+					{{square_row[$index]}}
+				</square>
+
+			<!--LEFT FACE -->
+				<!-- LEFT COL -->
+				<square ng-repeat="row in square_row" class="left_face left_col" ng-class="square_row[$index]">
+					{{square_row[$index]}}
+				</square>
+				
+				<!-- MIDDLE COL -->
+				<square ng-repeat="row in square_row" class="left_face middle_col" 
+				ng-class="{'upper': square_row[$index] === 'upper', 
+				'center middle': square_row[$index] === 'middle', 
+				'lower': square_row[$index] === 'lower'}">
+					{{square_row[$index]}}
+				</square>
+				
+				<!-- RIGHT COL -->
+				<square ng-repeat="row in square_row" class="left_face right_col" ng-class="square_row[$index]">
+					{{square_row[$index]}}
+				</square>
+
+			<!-- RIGHT FACE -->
+				<!-- LEFT COL -->
+				<square ng-repeat="row in square_row" class="right_face left_col" ng-class="square_row[$index]">
+					{{square_row[$index]}}
+				</square>
+				
+				<!-- MIDDLE COL -->
+				<square ng-repeat="row in square_row" class="right_face middle_col" 
+				ng-class="{'upper': square_row[$index] === 'upper', 
+				'center middle': square_row[$index] === 'middle', 
+				'lower': square_row[$index] === 'lower'}">
+					{{square_row[$index]}}
+				</square>
+				
+				<!-- RIGHT COL -->
+				<square ng-repeat="row in square_row" class="right_face right_col" ng-class="square_row[$index]">
+					{{square_row[$index]}}
+				</square>
+
+			</div>
+		</div>
+		
+		<script src="http://code.ionicframework.com/1.1.1/js/ionic.bundle.min.js"></script>
+		<script src="js/angular-cube.js"></script>
+		<script src="js/swipe.js"></script>
+		
+
+	</body>
+</html>
