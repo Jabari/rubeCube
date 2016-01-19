@@ -20,12 +20,14 @@ var app = angular.module('rubeCube', [])
 		}
 
 	}
+
 	$scope.onDragDown = function($event) {
 		console.log('swipe');
 	}
+
 	$scope.swipe = function($event) {
-	    console.log($event);
-	  };
+		console.log($event);
+	};
 	var el = '#cube';
 	var styleProp = 'backgroundColor';
 	$scope.prepare = function(el,styleProp) {
@@ -101,52 +103,63 @@ var app = angular.module('rubeCube', [])
 		var a = Math.floor(Math.random() * value);
 		var b = Math.floor(Math.random() * value);
 		var c = Math.floor(Math.random() * value);
-		var d = Math.random();
 		console.log(a, b, c);
-		return a, b, c, d;
+		return a, b, c;
 	}
 
 	$scope.randomHex = function(){
-		var color = Math.floor(Math.random() * 1000000);
+		var color = Math.floor(Math.random * 1000000);
 		var color = "#" + color;
 		console.log(color);
 		return color;
 	}
-	
+
 	var top, front, bottom, back, left, right;
 	
-	//var randomRGB = "rgb(" + red + ", " + green + ", " + blue +")";
  	top = document.querySelectorAll('.top-face');
  	bottom = document.querySelectorAll('.bottom-face');
  	front = document.querySelectorAll('.front-face');	
  	back = document.querySelectorAll('.back-face');
  	left = document.querySelectorAll('.left-face');
  	right = document.querySelectorAll('.right-face');
-
  	var sidesArr = [top, bottom, front, back, left, right];
- 	
 
-	$scope.changeColor = function() {
-		var i, len, side;
+ 	var changeColors = function() {
+ 		var i = 0;
+ 		var len = sidesArr.length;
+ 		for (i; i < len; i++) {
+ 			top.style.backgroundColor = 
+ 		}
+ 	}
+
+	// $scope.randomRGB = function(int) {
+	// 	top = randomColor();
+	// 	front = randomColor();
+	// 	bottom = randomColor();
+	// 	back = randomColor();
+	// 	left = randomColor();
+	// 	right = randomColor();
+	// 	for (i = 0; i < top.length, i++) {
+	// 		top.style.backgroundColor = randomColor();
+	// 		top.style.backgroundColor = randomColor();
+	// 		top.style.backgroundColor = randomColor();
+	// 		top.style.backgroundColor = randomColor();
+	// 		top.style.backgroundColor = randomColor();
+	// 		top.style.backgroundColor = randomColor();
+	// 	}
+
+	// 	int = int / 2;
+	// 	red = green = blue = Math.random() * color;
+	// 	randomRGB = "rgb(" + red + ", " + green + ", " + blue +")";
+	// 	console.log(int, randomRGB);
+	// 	//red = green = blue = Math.random() * color;
 		
-		for (i = 0, len = sidesArr.length; i < len; i++) {
-			side = sidesArr[i];
-			for (i = 0; i < side.length; i++) {
-				side[i].style.backgroundColor = randomColor();
-			}
-		}
+	// 	top.style.backgroundColor = "rgb(" + red + ", 0 ,0)";
+	// 	front.style.background = invert();
+	// 	left.style.background = "rgb(0, " + green + ", 0)";
+	// 	right.style.background = "rgb(0, 0, " + blue + ")";
 
-		//red = green = blue = Math.random() * color;
-		//randomRGB = "rgb(" + red + ", " + green + ", " + blue +")";
-		//console.log(int, randomRGB);
-		//red = green = blue = Math.random() * color;
-		
-		// top.style.backgroundColor = "rgb(" + red + ", 0 ,0)";
-		// front.style.background = invert();
-		// left.style.background = "rgb(0, " + green + ", 0)";
-		// right.style.background = "rgb(0, 0, " + blue + ")";
-
-	}
+	// }
 	var randomColor = function() {
 		var color;
 		color = Math.floor(Math.random() * 0x1000000); // integer between 0x0 and 0xFFFFFF

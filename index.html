@@ -2,6 +2,7 @@
 <html>
 <head>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href="favicon.ico" rel="icon">
 	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="/css/angular-cube.css">
 	<link rel="stylesheet" type="text/css" href="/css/style.css">
@@ -15,8 +16,13 @@
 	
 	<div class="container-fluid">
 		<div class="row container">
-			<div ng-app="rubeCube" ng-controller="sizeGen" class="container col-xs-12 col-md-12 cube-container" >
-				<div id="cube-viewport">
+			<div ng-app="rubeCube" class="container col-xs-12 col-md-12 cube-container" >	
+				<div ng-controller="colorGen">
+					<!-- <button class="button btn btn-default" ng-click="randomRGB();">randomRGB</button>
+					<button class="button btn btn-default" ng-click="changeColor();">changeColor</button> -->
+				</div>
+				<div id="cube-viewport" ng-controller="sizeGen">
+					
 					<div id="cube" style="-webkit-transform: rotateX(-15deg) rotateY(25deg)">
 					<!-- TOP FACE -->
 						<!-- LEFT COL -->
@@ -140,12 +146,18 @@
 				<script src="http://code.ionicframework.com/1.1.1/js/ionic.bundle.min.js"></script>
 				<script src="/js/angular-cube.js"></script>
 				<script src="/js/swipe.js"></script>
-				<dd><a href="/angular-cube/index.html">Vanilla - created with HTML5 & Angular</a></dd>
+				<dd>
+					<dl><dt>Vanilla</dt> - <dd>created with HTML5 & Angular</dd></dl>
+					<br />
+					<span class="error">Currently not interactive</span>
+				</dd>
 			</div><!--ng-app=rubeCube-->
 			
 			<div class="container col-xs-12 col-md-12 cube-container">
 				<game>
 				</game>
+				<button class="button btn btn-default" onclick="cube();">new cube</button>
+				<button class="button btn btn-default disabled" onclick="scramble();">scramble</button>
 				<ul>
 					<li><dl><dt>f</dt>-<dd>front</dd></li>
 					<li><dl><dt>b</dt>-<dd>back</dd></li>
@@ -153,6 +165,7 @@
 					<li><dl><dt>r</dt>-<dd>right</dd></li>
 					<li><dl><dt>u</dt>-<dd>up</dd></li>
 					<li><dl><dt>d</dt>-<dd>down</dd></li>
+					<li><dl><dt>shift</dt>-<dd>reverse</dd></li>
 					<!--<li><dl><dt>c</dt>-<dd>center</dd></li>
 					<li><dl><dt>m</dt>-<dd>middle</dd></li>-->
 				</ul>	
@@ -160,7 +173,7 @@
 				<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r58/three.min.js"></script>
 				<script src="../js/OrbitControls.js"></script>	
 				<script src="../js/three-cube.js"></script>
-				<dd><a href="/three-cube/index.html">Flavor of the Week - created with Three.js</a></dd>
+				<dl><dt>Flavor of the Week</dt> - <dd>created with Three.js</dd></dl>
 			</div><!--three-cube-->
 		</div><!--row-->
 	</div>
