@@ -12,7 +12,7 @@
 <body>
 	<header>
 		<h1>rübeCube</h1>
-		<h2>Player, choose your Cube!</h2>
+		<h2>Player, choose your cube!</h2>
 	</header>
 	
 	<div class="container-fluid">
@@ -25,7 +25,7 @@
 				</div>
 				<div id="cube-viewport" ng-controller="sizeGen">
 					
-					<div id="cube" style="-webkit-transform: rotateX(-5deg) rotateY(15deg)">
+					<div id="cube" style="-webkit-transform: rotateX(-15deg) rotateY(25deg)">
 					<!-- TOP FACE -->
 						<!-- LEFT COL -->
 						<square ng-repeat="row in square_row" class="top_face left_col color1" 				
@@ -173,14 +173,15 @@
 					<li><dl><dt>m</dt>-<dd>middle</dd></li>-->
 				</ul>
 				<dl>
-					<dd>You may also use </dd>
+					<dd>You may use </dd>
 					<dt>
 						<code>
 							<i class="glyphicon glyphicon-arrow-left" aria-hidden="true"></i>
 							<sup><i class="glyphicon glyphicon-arrow-up" aria-hidden="true"></i></sup>
 							<i class="glyphicon glyphicon-arrow-right" aria-hidden="true"></i>
 						</code>
-					</dt>
+					</dt>					
+					and mouse to pan
 				</dl>
 				<br />	
 				<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
@@ -191,7 +192,9 @@
 			</div><!--three-cube-->
 		</div><!--row-->
 		<footer>
-			<dl class="author"><dd>by</dd> <dt>jabari martin</dt></dl>
+			<dl class="author">
+				<dd>by</dd> <dt><a href="https://github.com/Jabari/rubeCube" target="_blank">jabari martin</a></dt>
+			</dl>
 		</footer>
 	</div>
 	
