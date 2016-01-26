@@ -2,12 +2,12 @@ $red: random(255);
 $blue: random(255);
 $green: random(255);
 $random_color: rgb($red, $blue, $green) !default;
-$topfacecolor: rgb($red, $red, 0);
-$frontfacecolor: $random_color;
-$bottomfacecolor: #f0f0f0;
-$backfacecolor: complement($random_color);
-$leftfacecolor: rgb(0, $blue, 0);
-$rightfacecolor: rgb(0, 0, $green);
+$color1:rgb($red, $red, 0); //top
+$color2: $random_color; //front
+$color3: #f0f0f0; //bottom
+$color4: complement($random_color); //back
+$color5: rgb(0, $blue, 0); //left
+$color6: rgb(0, 0, $green); //right
 
 body {
 	font-family: 'inconsolata', sans-serif;
@@ -19,8 +19,8 @@ body {
 #cube-viewport {
     
     h1 {
-      background: $backfacecolor;
-      color: $frontfacecolor;
+      background: $color4;
+      color: $color2;
       border: none;
       height: 2.5em;
       padding: 2em 1em;
@@ -28,7 +28,7 @@ body {
       margin-top: 0;
     }
     #background {
-      background: $frontfacecolor;
+      background: $color2;
       height: 400px;
       width: 100%;
     }
@@ -41,13 +41,13 @@ body {
     	}
 
     	&.button {
-    		background: $backfacecolor;
-    		color: $frontfacecolor;
+    		background: $color4;
+    		color: $color2;
     		border: none;
     		font-weight: bold;
     		font-size: 100%;
     		&:active {
-    			background: darken($frontfacecolor, 20%);
+    			background: darken($color2, 20%);
     		}
     	}
 
@@ -64,7 +64,7 @@ body {
     }
 
     #size_gen {
-    	color: $frontfacecolor;
+    	color: $color2;
     	font-size: 140%;
     	text-align: center;
     	font-weight: bold;
@@ -110,9 +110,26 @@ body {
         //height: 100px;
         z-index: -1;
         text-align: center;
-        font-size: 30px;
+        //font-size: 30px;
+        &.color1 { //top
+            background: $color1;
+        }
+        &.color2 { //front
+            background: $color2;
+        }
+        &.color3 { //bottom
+           background: $color3; 
+        }
+        &.color4 { //back
+            background: $color4;
+        }
+        &.color5{ //left
+            background: $color5;   
+        }
+        &.color6 { //right
+            background: $color6;
+        }
         &.top_face {
-        	background: $topfacecolor;
         	&.upper {
         		&.left_col {
         			-webkit-transform: rotateX(90deg) translate3d(50px, -100px,0px);;
@@ -149,7 +166,6 @@ body {
         	}    	
         }
         &.front_face {
-        	background: $frontfacecolor;
         	&.upper {
         		&.left_col {
         			-webkit-transform:translate3d(50px,50px,150px);
@@ -185,7 +201,6 @@ body {
         	}   
         }
         &.bottom_face {
-        	background: $bottomfacecolor;
         	&.upper {
         		&.left_col {
         			-webkit-transform: rotateX(-90deg) translate3d(50px,-100px,300px);
@@ -221,7 +236,6 @@ body {
         	}   
         }
         &.back_face {
-        	background: $backfacecolor;
         	&.upper {
         		&.left_col {
         			-webkit-transform: rotateX(-180deg) translate3d(50px,-250px,150px);
@@ -257,7 +271,6 @@ body {
         	}   
         }
         &.left_face {
-        	background: $leftfacecolor;
         	&.upper {
     	    	&.left_col {
         			-webkit-transform: rotateY(-90deg) translate3d(-100px,50px,0px);
@@ -293,7 +306,6 @@ body {
         	}
         }
         &.right_face {
-        	background: $rightfacecolor;
         	&.upper {
     	    	&.left_col {
         			-webkit-transform: rotateY(90deg) translate3d(-100px,50px,300px);
@@ -331,17 +343,3 @@ body {
     	}
     }//square
 }
-
-
-
-// {
-//   color: #fff;
-//   background: #fff;
-//   -webkit-background-clip: text;
-//   -webkit-text-fill-color: transparent;
-// }
-// {
-//   background: linear-gradient(#65b849 17%, #f7b423 17%, #f7b423 34%, #f58122 34%, #f58122 50%, #de3a3c 50%, #de3a3c 66%, #943f96 66%, #943f96 82%, #009fd9 82%, #009fd9 86%);
-//   -webkit-background-clip: text;
-//   -webkit-text-fill-color: transparent;
-// }

@@ -2,10 +2,11 @@
 <html>
 <head>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="content-type" content="text/html;charset=utf-8" />
 	<link href="favicon.ico" rel="icon">
 	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-	<link rel="stylesheet" type="text/css" href="/css/angular-cube.css">
-	<link rel="stylesheet" type="text/css" href="/css/style.css">
+	<link rel="stylesheet" type="text/css" href="css/angular-cube.css">
+	<link rel="stylesheet" type="text/css" href="css/style.css">
 	<title>rübeCube</title>
 </head>
 <body>
@@ -17,23 +18,24 @@
 	<div class="container-fluid">
 		<div class="row container">
 			<div ng-app="rubeCube" class="container col-xs-12 col-md-12 cube-container" >	
-				<div ng-controller="colorGen">
-					<!-- <button class="button btn btn-default" ng-click="randomRGB();">randomRGB</button>
-					<button class="button btn btn-default" ng-click="changeColor();">changeColor</button> -->
+				<div ng-controller="cubeLogic">
+					<button class="button btn btn-default disabled" id="switch1">L - clockwise</button>
+					<button class="button btn btn-default disabled" id="switch2">L - counter-clockwise</button>
+					<button class="button btn btn-default disabled" ng-click="changeColor();">changeColor</button>
 				</div>
 				<div id="cube-viewport" ng-controller="sizeGen">
 					
-					<div id="cube" style="-webkit-transform: rotateX(-15deg) rotateY(25deg)">
+					<div id="cube" style="-webkit-transform: rotateX(-5deg) rotateY(15deg)">
 					<!-- TOP FACE -->
 						<!-- LEFT COL -->
-						<square ng-repeat="row in square_row" class="top_face left_col" 				
+						<square ng-repeat="row in square_row" class="top_face left_col color1" 				
 						ng-class="square_row[$index]" ng-swipe-up="console.log($event)"
 						ng-swipe-down="console.log('swipe')" on-swipe-left="swipe($event)" on-swipe-right="swipe($event)">
 							{{square_row[$index]}}
 						</square>
 						
 						<!-- MIDDLE COL -->
-						<square ng-repeat="row in square_row" class="top_face middle_col" 
+						<square ng-repeat="row in square_row" class="top_face middle_col color1" 
 						ng-class="{'upper': square_row[$index] === 'upper', 
 						'center middle': square_row[$index] === 'middle', 
 						'lower': square_row[$index] === 'lower'}">
@@ -41,19 +43,19 @@
 						</square>
 
 						<!-- RIGHT COL -->
-						<square ng-repeat="row in square_row" class="top_face right_col" ng-class="square_row[$index]">
+						<square ng-repeat="row in square_row" class="top_face right_col color1" ng-class="square_row[$index]">
 							{{square_row[$index]}}
 						</square>
 
 					<!-- FRONT FACE -->
 						<!-- LEFT COL -->
-						<square ng-repeat="row in square_row" class="front_face left_col" ng-class="square_row[$index]"
+						<square ng-repeat="row in square_row" class="front_face left_col color2" ng-class="square_row[$index]"
 						on-swipe-left="console.log('swipeleft')" on-swipe-down="onDragDown()" >
 							{{square_row[$index]}}
 						</square>
 						
 						<!-- MIDDLE COL -->
-						<square ng-repeat="row in square_row" class="front_face middle_col" 
+						<square ng-repeat="row in square_row" class="front_face middle_col color2" 
 						ng-class="{'upper': square_row[$index] === 'upper', 
 						'center middle': square_row[$index] === 'middle', 
 						'lower': square_row[$index] === 'lower'}" ng-swipe-up="console.log($event)"
@@ -62,18 +64,18 @@
 						</square>
 						
 						<!-- RIGHT COL -->
-						<square ng-repeat="row in square_row" class="front_face right_col" ng-class="square_row[$index]">
+						<square ng-repeat="row in square_row" class="front_face right_col color2" ng-class="square_row[$index]">
 							{{square_row[$index]}}
 						</square>
 
 					<!-- DOWN FACE (lower & bottom would --> 
 						<!-- LEFT COL -->
-						<square ng-repeat="row in square_row" class="bottom_face left_col" ng-class="square_row[$index]">
+						<square ng-repeat="row in square_row" class="bottom_face left_col color3" ng-class="square_row[$index]">
 							{{square_row[$index]}}
 						</square>
 						
 						<!-- MIDDLE COL -->
-						<square ng-repeat="row in square_row" class="bottom_face middle_col" 
+						<square ng-repeat="row in square_row" class="bottom_face middle_col color3" 
 						ng-class="{'upper': square_row[$index] === 'upper', 
 						'center middle': square_row[$index] === 'middle', 
 						'lower': square_row[$index] === 'lower'}">
@@ -81,18 +83,18 @@
 						</square>
 						
 						<!-- RIGHT COL -->
-						<square ng-repeat="row in square_row" class="bottom_face right_col" ng-class="square_row[$index]">
+						<square ng-repeat="row in square_row" class="bottom_face right_col color3" ng-class="square_row[$index]">
 							{{square_row[$index]}}
 						</square>
 
 					<!-- BACK FACE -->
 						<!-- LEFT COL -->
-						<square ng-repeat="row in square_row" class="back_face left_col" ng-class="square_row[$index]">
+						<square ng-repeat="row in square_row" class="back_face left_col color4" ng-class="square_row[$index]">
 							{{square_row[$index]}}
 						</square>
 						
 						<!-- MIDDLE COL -->
-						<square ng-repeat="row in square_row" class="back_face middle_col" 
+						<square ng-repeat="row in square_row" class="back_face middle_col color4" 
 						ng-class="{'upper': square_row[$index] === 'upper', 
 						'center middle': square_row[$index] === 'middle', 
 						'lower': square_row[$index] === 'lower'}">
@@ -100,18 +102,18 @@
 						</square>
 						
 						<!-- RIGHT COL -->
-						<square ng-repeat="row in square_row" class="back_face right_col" ng-class="square_row[$index]">
+						<square ng-repeat="row in square_row" class="back_face right_col color4" ng-class="square_row[$index]">
 							{{square_row[$index]}}
 						</square>
 
 					<!--LEFT FACE -->
 						<!-- LEFT COL -->
-						<square ng-repeat="row in square_row" class="left_face left_col" ng-class="square_row[$index]">
+						<square ng-repeat="row in square_row" class="left_face left_col color5" ng-class="square_row[$index]">
 							{{square_row[$index]}}
 						</square>
 						
 						<!-- MIDDLE COL -->
-						<square ng-repeat="row in square_row" class="left_face middle_col" 
+						<square ng-repeat="row in square_row" class="left_face middle_col color5" 
 						ng-class="{'upper': square_row[$index] === 'upper', 
 						'center middle': square_row[$index] === 'middle', 
 						'lower': square_row[$index] === 'lower'}">
@@ -119,18 +121,18 @@
 						</square>
 						
 						<!-- RIGHT COL -->
-						<square ng-repeat="row in square_row" class="left_face right_col" ng-class="square_row[$index]">
+						<square ng-repeat="row in square_row" class="left_face right_col color5" ng-class="square_row[$index]">
 							{{square_row[$index]}}
 						</square>
 
 					<!-- RIGHT FACE -->
 						<!-- LEFT COL -->
-						<square ng-repeat="row in square_row" class="right_face left_col" ng-class="square_row[$index]">
+						<square ng-repeat="row in square_row" class="right_face left_col color6" ng-class="square_row[$index]">
 							{{square_row[$index]}}
 						</square>
 						
 						<!-- MIDDLE COL -->
-						<square ng-repeat="row in square_row" class="right_face middle_col" 
+						<square ng-repeat="row in square_row" class="right_face middle_col color6" 
 						ng-class="{'upper': square_row[$index] === 'upper', 
 						'center middle': square_row[$index] === 'middle', 
 						'lower': square_row[$index] === 'lower'}">
@@ -138,16 +140,17 @@
 						</square>
 						
 						<!-- RIGHT COL -->
-						<square ng-repeat="row in square_row" class="right_face right_col" ng-class="square_row[$index]">
+						<square ng-repeat="row in square_row" class="right_face right_col color6" ng-class="square_row[$index]">
 							{{square_row[$index]}}
 						</square>
 					</div><!--cube-->
 				</div><!--cube viewport-->
-				<script src="http://code.ionicframework.com/1.1.1/js/ionic.bundle.min.js"></script>
-				<script src="/js/angular-cube.js"></script>
-				<script src="/js/swipe.js"></script>
+				<script src="https://code.ionicframework.com/1.1.1/js/ionic.bundle.min.js"></script>
+				<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+				<script src="js/angular-cube.js"></script>
+				<!--<script src="/js/swipe.js"></script>-->
 				<dd>
-					<dl><dt>Vanilla</dt> - <dd>created with HTML5 & Angular</dd></dl>
+					<dl><dt class="vanilla">Vanilla</dt> - <dd>created with HTML5 & Angular</dd></dl>
 					<br />
 					<span class="error">Currently not interactive</span>
 				</dd>
@@ -156,8 +159,8 @@
 			<div class="container col-xs-12 col-md-12 cube-container">
 				<game>
 				</game>
-				<button class="button btn btn-default" onclick="cube();">new cube</button>
-				<button class="button btn btn-default disabled" onclick="scramble();">scramble</button>
+				<button class="button btn btn-default" onclick="newCube();">new cube</button>
+				<button class="button btn btn-default" onclick="scramble();">scramble</button>
 				<ul>
 					<li><dl><dt>f</dt>-<dd>front</dd></li>
 					<li><dl><dt>b</dt>-<dd>back</dd></li>
@@ -168,23 +171,30 @@
 					<li><dl><dt>shift</dt>-<dd>reverse</dd></li>
 					<!--<li><dl><dt>c</dt>-<dd>center</dd></li>
 					<li><dl><dt>m</dt>-<dd>middle</dd></li>-->
-				</ul>	
+				</ul>
+				<dl>
+					<dd>You may also use </dd>
+					<dt>
+						<code>
+							<i class="glyphicon glyphicon-arrow-left" aria-hidden="true"></i>
+							<sup><i class="glyphicon glyphicon-arrow-up" aria-hidden="true"></i></sup>
+							<i class="glyphicon glyphicon-arrow-right" aria-hidden="true"></i>
+						</code>
+					</dt>
+				</dl>
+				<br />	
 				<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 				<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r58/three.min.js"></script>
-				<script src="../js/OrbitControls.js"></script>	
-				<script src="../js/three-cube.js"></script>
-				<dl><dt>Flavor of the Week</dt> - <dd>created with Three.js</dd></dl>
+				<script src="js/OrbitControls.js"></script>	
+				<script src="js/three-cube.js"></script>
+				<dl><dt class="flavor-of-week">Flavor of the Week</dt> - <dd>created with Three.js</dd></dl>
 			</div><!--three-cube-->
 		</div><!--row-->
+		<footer>
+			<dl class="author"><dd>by</dd> <dt>jabari martin</dt></dl>
+		</footer>
 	</div>
-	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+	
 	<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-	<script>
-	$(document).ready(function() {
-		$('canvas').width(window.innerWidth / 2);
-		$('game').width($('game').parent().width());
-		console.log($('game').width());
-	})
-	<!--<script type="text/javascript" src="/js/script.js"></script>-->
 </body>
 </html>
