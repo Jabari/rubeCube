@@ -79,6 +79,7 @@ function move(random) {
 }
 
 function init() { //all functions within req'd for cube formation
+  console.log("init")
   var axis, axises, camera, clicking, controls, cshift, cube, cubes, curor, curpos, currentFrame, d, de2ra, defdir, directionalLight, findcoord, getAxisFromRot, getDirFromLocRot, getDirFromRot, getDirFromTopRot, getNewAxis, globqty, lastFrame, lastdir, left, lerp, makecube, mouse, mousepos, movcam, moving, right, origincam, position, ra2de, front, render, renderer, right, rotWorldMatrix, rotate, rotateAroundWorldAxis, scene, shiftcube, target, targetcam, time, time2, timeDelta, bottom, top;
 
   renderer = scene = camera = cube = directionalLight = controls = lastdir = null;

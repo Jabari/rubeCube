@@ -277,9 +277,9 @@ var app = angular.module('rubeCube', [])
 })
 .directive('square', function($parse) {
     return {
-      restrict: 'E',
+      restrict: "E",
       replace: true,
       translude: false,
-      template: '<div class="square"></div>'
-    }
+      template: '<div class="square"></div><div class="square"></div>',
+    };
 })

@@ -19,6 +19,7 @@
   "author": "jabari martin",
   "license": "ISC",
   "devDependencies": {
-    "nodemon": "^1.8.1"
+    "nodemon": "^1.8.1",
+    "node-sass": "^7.0.3"
   }
 }

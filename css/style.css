@@ -27,12 +27,48 @@ header {
   }
 }
 #cube {
-    -webkit-animation-name:             rotate; 
-    -webkit-animation-duration:         15s; 
+    -webkit-animation-duration: 15s;
     -webkit-animation-iteration-count:  infinite;
     -webkit-animation-timing-function: linear;
     -webkit-transform-origin: default;
     margin: 0 auto;
+}
+#controls__container {
+		width: 100%;
+		height: 100%;
+		position: absolute;
+		display: grid;
+		grid-template-columns: repeat(5, 1fr);
+        grid-auto-rows: 25%;
+		grid-template-areas:
+		"l t t t r"
+		"l l t r r"
+		"l l b r r"
+		"l b b b r";
+}
+.controls {
+        background-color: red;
+        opacity: 0.2;
+        border: 2px black solid;
+        position: relative;
+        //width: 50%;
+        //height: 50%;
+}
+.controls:first-of-type {
+    grid-area: l;
+}
+.controls:nth-of-type(2) {
+    grid-area: t;
+}
+.controls:nth-of-type(3) {
+    grid-area: r;
+}
+.controls:nth-of-type(4) {
+    grid-area: b;
+}
+
+#cube.animate {
+    -webkit-animation-name: rotate; 
 }
 button.button {
     color: #c7254e;
