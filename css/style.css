@@ -1,22 +1,20 @@
 .cube-container {
 	padding: 9px 14px;
 }
-
-header {
-	
-}
 .container {
 	text-align: center;
     margin: 2.5em auto 0;
     display: block;
 }
-.col-xs-12 .col-md-6 {
-	clear: both;
-	margin: 0 auto;
-	float: left;
+.flex-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
 }
-.row {
-	overflow: ;
+.half-width {
+    width: 50%;
+    min-width: 280px;
+
 }
 @-webkit-keyframes rotate {
   from {
@@ -51,8 +49,6 @@ header {
         opacity: 0.2;
         border: 2px black solid;
         position: relative;
-        //width: 50%;
-        //height: 50%;
 }
 .controls:first-of-type {
     grid-area: l;
@@ -86,12 +82,6 @@ button.button:focus {
 body {
 	overflow-x: hidden;
 	text-align: center;
-}
-game {
-	position: relative;
-	margin: 0 auto;
-	text-align: center;
-    left: -7%;
 }
 ul {
 	padding: 0;

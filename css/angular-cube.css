@@ -3,8 +3,8 @@ body {
   font-size: 14px; }
 
 #cube-viewport h1 {
-  background: #5de7b9;
-  color: #e75d8b;
+  background: #2ccc22;
+  color: #c222cc;
   border: none;
   height: 2.5em;
   padding: 2em 1em;
@@ -12,7 +12,7 @@ body {
   margin-top: 0; }
 
 #cube-viewport #background {
-  background: #e75d8b;
+  background: #c222cc;
   height: 400px;
   width: 100%; }
 
@@ -21,13 +21,13 @@ body {
   #cube-viewport button:focus {
     outline: none; }
   #cube-viewport button.button {
-    background: #5de7b9;
-    color: #e75d8b;
+    background: #2ccc22;
+    color: #c222cc;
     border: none;
     font-weight: bold;
     font-size: 100%; }
     #cube-viewport button.button:active {
-      background: #c11d54; }
+      background: #6f1375; }
   #cube-viewport button.round {
     border-radius: 50%;
     width: 40px;
@@ -37,7 +37,7 @@ body {
   -webkit-transition: all .2s linear; }
 
 #cube-viewport #size_gen {
-  color: #e75d8b;
+  color: #c222cc;
   font-size: 140%;
   text-align: center;
   font-weight: bold; }
@@ -98,17 +98,17 @@ body {
   z-index: -1;
   text-align: center; }
   #cube-viewport .square.color1 {
-    background: #e7e700; }
+    background: #c2c200; }
   #cube-viewport .square.color2 {
-    background: #e75d8b; }
+    background: #c222cc; }
   #cube-viewport .square.color3 {
     background: #f0f0f0; }
   #cube-viewport .square.color4 {
-    background: #5de7b9; }
+    background: #2ccc22; }
   #cube-viewport .square.color5 {
-    background: #005d00; }
+    background: #002200; }
   #cube-viewport .square.color6 {
-    background: darkblue; }
+    background: #0000cc; }
   #cube-viewport .square.top_face.upper.left_col {
     -webkit-transform: rotateX(90deg) translate3d(50px, -100px, 0px); }
   #cube-viewport .square.top_face.upper.middle_col {

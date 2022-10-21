@@ -1,160 +1,193 @@
 init();
 
-function newCube() {
-  init()
-  this.i = 0;
-}
-
-var i = 0; //i admit, this prolly shouldnt be global
-
-function scramble() {
-  
-  move( die() );
-
-  setTimeout(function() {
-    i++;
-    
-    if (i < 20) {
-      scramble();
-    }
-  
-  }, 500);    
-}
-
-function die() { //singular of dice; not fatal
-  var random = Math.floor(Math.random() * 12);
+function die() {
+  //singular of dice; not fatal
+  const random = Math.floor(Math.random() * 12);
   return random;
 }
 
 function move(random) {
-  switch(random) {
+  switch (random) {
+    /**
+     * (face, direction)
+     * u: up, d: down, f: front, b: back, l: left, r: right
+     * 1: clockwise, -1: counterclockwise
+     **/
     case 0:
-    rotate("u", 1);
-    break;
+      rotate("u", 1);
+      break;
 
     case 1:
-    rotate("u", -1);
-    break;
+      rotate("u", -1);
+      break;
 
     case 2:
-    rotate("f", 1);
-    break;
+      rotate("f", 1);
+      break;
 
     case 3:
-    rotate("f", -1);
-    break;
+      rotate("f", -1);
+      break;
 
     case 4:
-    rotate("d", 1);
-    break;
+      rotate("d", 1);
+      break;
 
     case 5:
-    rotate("d", -1);
-    break;
+      rotate("d", -1);
+      break;
 
     case 6:
-    rotate("b", 1);
-    break;
+      rotate("b", 1);
+      break;
 
     case 7:
-    rotate("b", -1);
-    break;
+      rotate("b", -1);
+      break;
 
     case 8:
-    rotate("l", 1);
-    break;
+      rotate("l", 1);
+      break;
 
     case 9:
-    rotate("l", -1);
-    break;
+      rotate("l", -1);
+      break;
 
     case 10:
-    rotate("r", 1)
-    break;
+      rotate("r", 1);
+      break;
 
     case 11:
-    rotate("r", -1);
-    break;
+      rotate("r", -1);
+      break;
   }
 }
 
-function init() { //all functions within req'd for cube formation
-  console.log("init")
-  var axis, axises, camera, clicking, controls, cshift, cube, cubes, curor, curpos, currentFrame, d, de2ra, defdir, directionalLight, findcoord, getAxisFromRot, getDirFromLocRot, getDirFromRot, getDirFromTopRot, getNewAxis, globqty, lastFrame, lastdir, left, lerp, makecube, mouse, mousepos, movcam, moving, right, origincam, position, ra2de, front, render, renderer, right, rotWorldMatrix, rotate, rotateAroundWorldAxis, scene, shiftcube, target, targetcam, time, time2, timeDelta, bottom, top;
+function scramble(event) {
+  // disable button until scrambling is finished
+  event.setAttribute("disabled", true);
 
-  renderer = scene = camera = cube = directionalLight = controls = lastdir = null;
+  var i = 0;
 
-  newColors();
+  var scrambling = setInterval(function () {
+    if (i < 25) {
+      move(die());
+      i++;
+    } else {
+      event.removeAttribute("disabled");
+      clearInterval(scrambling);
+    }
+  }, 300);
+}
 
-  function randomColor() {
-    var color = Math.floor(Math.random() * 1000000);
-    color = color; 
-    console.log("random: " + color);
-    return color;
-  };
+function init() {
+  console.log("init");
+  //all functions within req'd for cube formation
+  let axis,
+    axises,
+    camera,
+    clicking,
+    controls,
+    cshift,
+    cube,
+    cubes,
+    curor,
+    curpos,
+    currentFrame,
+    d,
+    de2ra,
+    defdir,
+    findcoord,
+    getAxisFromRot,
+    getDirFromLocRot,
+    getDirFromRot,
+    getDirFromTopRot,
+    getNewAxis,
+    globqty,
+    lastFrame,
+    lastdir,
+    left,
+    lerp,
+    makecube,
+    mouse,
+    mousepos,
+    movcam,
+    moving,
+    origincam,
+    position,
+    ra2de,
+    front,
+    render,
+    renderer,
+    right,
+    rotWorldMatrix,
+    rotate,
+    rotateAroundWorldAxis,
+    scene,
+    shiftcube,
+    target,
+    targetcam,
+    time,
+    time2,
+    timeDelta,
+    bottom,
+    top;
 
-  function invertColor() {
-    var color = randomColor();
-    var invertedColor = 0xFFFFFF ^ color;
-    return invertedColor;
-  }
+  renderer =
+    scene =
+    camera =
+    cube =
+    controls =
+    lastdir =
+    currentFrame =
+    timeDelta =
+    cube =
+    cubes =
+    target =
+    axis =
+    axises =
+    position =
+    defdir =
+    rotWorldMatrix =
+    globqty =
+      null;
 
-  function invertColor1() {
-    var color = invertColor();
-    var invertedColor = 0x222222 ^ color;
-    return invertedColor;
-  }
-
-  function newColors() {
-    top = randomColor(); 
-    bottom = invertColor(); 
-    front = randomColor() ^ invertColor(); 
-    back = randomColor() & invertColor(); 
-    left = randomColor() | invertColor1(); 
-    right = invertColor1(); 
-  }
+  moving = movcam = shiftcube = clicking = false;
 
   d = 1.03;
-
   curpos = "f";
-
   curor = "u";
-
   time = time2 = 0;
 
   mouse = {
     x: 0,
-    y: 0
+    y: 0,
   };
 
   mousepos = {
     x: 0,
-    y: 0
+    y: 0,
   };
 
   origincam = {
     x: 0,
-    y: 0
+    y: 0,
   };
 
   targetcam = {
     x: 0,
-    y: 0
+    y: 0,
   };
 
-  clicking = false;
-
-  moving = movcam = shiftcube = false;
-
-  de2ra = function(degree) {
-    return degree * Math.PI / 180;
+  de2ra = function (degree) {
+    return (degree * Math.PI) / 180;
   };
 
-  ra2de = function(degree) {
-    return degree / Math.PI * 180;
+  ra2de = function (degree) {
+    return (degree / Math.PI) * 180;
   };
 
-  lerp = function(a, b, t) {
+  lerp = function (a, b, t) {
     return a + t * (b - a);
   };
 
@@ -162,35 +195,67 @@ function init() { //all functions within req'd for cube formation
 
   lastFrame = Date.now();
 
-  globqty = null;
+  function randomColor() {
+    const color = Math.floor(Math.random() * 1000000);
+    return color;
+  }
 
-  render = function() {
-    var c, _i, _j, _len, _len1;
+  function invertColor() {
+    const color = randomColor();
+    const invertedColor = 0xffffff ^ color;
+    return invertedColor;
+  }
+
+  function invertColor1() {
+    const color = invertColor();
+    const invertedColor = 0x222222 ^ color;
+    return invertedColor;
+  }
+
+  newColors();
+  function newColors() {
+    top = randomColor();
+    bottom = invertColor();
+    front = randomColor() ^ invertColor();
+    back = randomColor() & invertColor();
+    left = randomColor() | invertColor1();
+    right = invertColor1();
+  }
+
+  render = function () {
+    let c, i, j, len, len1;
     currentFrame = Date.now();
     timeDelta = currentFrame - lastFrame;
     requestAnimationFrame(render);
     if (moving) {
       if (time >= 1) {
-        for (_i = 0, _len = cubes.length; _i < _len; _i++) {
-          c = cubes[_i];
-          rotateAroundWorldAxis(c, axises[_i], target[_i] - globqty[_i]);
+        for (i = 0, len = cubes.length; i < len; i++) {
+          c = cubes[i];
+          rotateAroundWorldAxis(c, axises[i], target[i] - globqty[i]);
         }
         moving = false;
         time = 0;
         getNewAxis();
       } else {
-        time += 8 * timeDelta / 1000;
-        for (_j = 0, _len1 = cubes.length; _j < _len1; _j++) {
-          c = cubes[_j];
-          rotateAroundWorldAxis(c, axises[_j], target[_j] * 8 * timeDelta / 1000);
-          globqty[_j] += target[_j] * 8 * timeDelta / 1000;
+        time += (8 * timeDelta) / 1000;
+        for (j = 0, len1 = cubes.length; j < len1; j++) {
+          c = cubes[j];
+          rotateAroundWorldAxis(
+            c,
+            axises[j],
+            (target[j] * 8 * timeDelta) / 1000
+          );
+          globqty[j] += (target[j] * 8 * timeDelta) / 1000;
         }
       }
     }
     if (movcam) {
       if (time2 < 1) {
-        time2 += 8 * timeDelta / 1000;
-        controls.setRotation(lerp(origincam.x, targetcam.x, time2), lerp(origincam.y, targetcam.y, time2));
+        time2 += (8 * timeDelta) / 1000;
+        controls.setRotation(
+          lerp(origincam.x, targetcam.x, time2),
+          lerp(origincam.y, targetcam.y, time2)
+        );
       } else {
         controls.setRotation(targetcam.x, targetcam.y);
         movcam = false;
@@ -204,28 +269,51 @@ function init() { //all functions within req'd for cube formation
         time = 0;
         getNewAxis();
       } else {
-        time += 8 * timeDelta / 1000;
-        rotateAroundWorldAxis(cube, axis, target * 8 * timeDelta / 1000);
-        globqty += target * 8 * timeDelta / 1000;
+        time += (8 * timeDelta) / 1000;
+        rotateAroundWorldAxis(cube, axis, (target * 8 * timeDelta) / 1000);
+        globqty += (target * 8 * timeDelta) / 1000;
       }
     }
     controls.update();
     renderer.render(scene, camera);
-    return lastFrame = currentFrame;
+    return (lastFrame = currentFrame);
   };
 
-  makecube = function() {
-    var basegeom, cubcol, cx, cy, cz, db, dc, dd, df, dl, dm, dr, du, material, plane, plcol, tiledcube, x, y, z, zc, _i, _j, _k;
+  makecube = function () {
+    let basegeom,
+      cubcol,
+      cx,
+      cy,
+      cz,
+      db,
+      dc,
+      dd,
+      df,
+      dl,
+      dm,
+      dr,
+      du,
+      material,
+      plane,
+      plcol,
+      tiledcube,
+      x,
+      y,
+      z,
+      zc,
+      i,
+      j,
+      k;
     dc = df = db = du = dd = dl = dm = dr = false;
     basegeom = new THREE.CubeGeometry(1, 1, 1);
     plane = new THREE.PlaneGeometry(0.96, 0.96);
     material = new THREE.MeshBasicMaterial({
-      color: 0x000000
+      color: 0x000000,
     });
     cube = new THREE.Object3D();
-    for (x = _i = 0; _i <= 2; x = ++_i) {
-      for (y = _j = 0; _j <= 2; y = ++_j) {
-        for (z = _k = 0; _k <= 2; z = ++_k) {
+    for (x = i = 0; i <= 2; x = ++i) {
+      for (y = j = 0; j <= 2; y = ++j) {
+        for (z = k = 0; k <= 2; z = ++k) {
           tiledcube = new THREE.Object3D();
           cubcol = new THREE.Mesh(basegeom, material);
           cubcol.position.set(-d + d * x, -d + d * y, -d + d * z);
@@ -240,17 +328,23 @@ function init() { //all functions within req'd for cube formation
           dm = y === 1;
           du = y === 2;
           if (dl || dr) {
-            plcol = new THREE.Mesh(plane, new THREE.MeshBasicMaterial({
-              color: dr ? left : right
-            }));
+            plcol = new THREE.Mesh(
+              plane,
+              new THREE.MeshBasicMaterial({
+                color: dr ? left : right,
+              })
+            );
             plcol.rotation.y = de2ra(dr ? 90 : -90);
             plcol.position.x += dl ? -d / 2 : d / 2;
             cubcol.add(plcol);
           }
           if (db || df) {
-            plcol = new THREE.Mesh(plane, new THREE.MeshBasicMaterial({
-              color: df ? back : front
-            }));
+            plcol = new THREE.Mesh(
+              plane,
+              new THREE.MeshBasicMaterial({
+                color: df ? back : front,
+              })
+            );
             if (db) {
               plcol.rotation.y = de2ra(180);
             }
@@ -258,9 +352,12 @@ function init() { //all functions within req'd for cube formation
             cubcol.add(plcol);
           }
           if (dd || du) {
-            plcol = new THREE.Mesh(plane, new THREE.MeshBasicMaterial({
-              color: du ? top : bottom
-            }));
+            plcol = new THREE.Mesh(
+              plane,
+              new THREE.MeshBasicMaterial({
+                color: du ? top : bottom,
+              })
+            );
             plcol.rotation.x = de2ra(dd ? 90 : -90);
             plcol.position.y += dd ? -d / 2 : d / 2;
             cubcol.add(plcol);
@@ -293,9 +390,7 @@ function init() { //all functions within req'd for cube formation
     return cube;
   };
 
-  rotWorldMatrix = null;
-
-  rotateAroundWorldAxis = function(object, axis, radians) {
+  rotateAroundWorldAxis = function (object, axis, radians) {
     rotWorldMatrix = new THREE.Matrix4();
     rotWorldMatrix.makeRotationAxis(axis.normalize(), radians);
     rotWorldMatrix.multiply(object.matrix);
@@ -303,10 +398,8 @@ function init() { //all functions within req'd for cube formation
     object.rotation.setEulerFromRotationMatrix(object.matrix, object.order);
   };
 
-  cube = cubes = target = axis = axises = position = defdir = null;
-
-  findcoord = function(objMesh) {
-    var boundingBox;
+  findcoord = function (objMesh) {
+    let boundingBox;
     objMesh.geometry.computeBoundingBox();
     boundingBox = objMesh.geometry.boundingBox;
     position = new THREE.Vector3();
@@ -317,14 +410,12 @@ function init() { //all functions within req'd for cube formation
     return position;
   };
 
-  getAxisFromRot = function(orAx) {
+  getAxisFromRot = function (orAx) {
     switch (curpos) {
-
       case "f":
       case "o":
       case "b":
         switch (curor) {
-
           case "u":
           case "m":
           case "d":
@@ -333,14 +424,12 @@ function init() { //all functions within req'd for cube formation
           case "c":
           case "r":
             switch (orAx) {
-
               case "z":
                 return "z";
               case "y":
                 return "x";
               case "x":
                 return "y";
-
             }
         }
         break;
@@ -348,12 +437,10 @@ function init() { //all functions within req'd for cube formation
       case "c":
       case "r":
         switch (curor) {
-
           case "u":
           case "m":
           case "d":
             switch (orAx) {
-
               case "z":
                 return "x";
               case "x":
@@ -366,14 +453,12 @@ function init() { //all functions within req'd for cube formation
           case "o":
           case "b":
             switch (orAx) {
-
               case "z":
                 return "x";
               case "y":
                 return "z";
               case "x":
                 return "y";
-
             }
         }
         break;
@@ -381,57 +466,48 @@ function init() { //all functions within req'd for cube formation
       case "m":
       case "d":
         switch (curor) {
-
           case "f":
           case "o":
           case "b":
             switch (orAx) {
-
               case "x":
                 return "x";
               case "y":
                 return "z";
               case "z":
                 return "y";
-
             }
             break;
           case "l":
           case "c":
           case "r":
             switch (orAx) {
-
               case "x":
                 return "z";
               case "y":
                 return "x";
               case "z":
                 return "y";
-
             }
         }
     }
     return false;
   };
 
-  getDirFromRot = function(orAx) {
+  getDirFromRot = function (orAx) {
     switch (curpos) {
-
       case "f":
         switch (curor) {
-
           case "u":
           case "r":
             return orAx;
           case "l":
           case "d":
             return -orAx;
-
         }
         break;
       case "b":
         switch (curor) {
-
           case "u":
           case "r":
             return -orAx;
@@ -452,46 +528,39 @@ function init() { //all functions within req'd for cube formation
         break;
       case "d":
         switch (curor) {
-
           case "r":
           case "b":
             return -orAx;
           case "l":
           case "f":
             return orAx;
-
         }
         break;
       case "l":
         switch (curor) {
-
           case "u":
           case "f":
             return orAx;
           case "b":
           case "d":
             return -orAx;
-
         }
         break;
       case "r":
         switch (curor) {
-
           case "u":
           case "f":
             return -orAx;
           case "b":
           case "d":
             return orAx;
-
         }
     }
     return false;
   };
 
-  getDirFromLocRot = function(orAx) {
+  getDirFromLocRot = function (orAx) {
     switch (curpos) {
-
       case "f":
         return -orAx;
       case "b":
@@ -504,14 +573,12 @@ function init() { //all functions within req'd for cube formation
         return orAx;
       case "r":
         return -orAx;
-
     }
     return false;
   };
 
-  getDirFromTopRot = function(orAx) {
+  getDirFromTopRot = function (orAx) {
     switch (curor) {
-
       case "f":
         return -orAx;
       case "b":
@@ -524,17 +591,15 @@ function init() { //all functions within req'd for cube formation
         return orAx;
       case "r":
         return -orAx;
-
     }
     return false;
   };
 
-  getNewAxis = function() {
-
-    var cubcle, fname, tname, _i, _len, _ref;
-    _ref = cube.children;
-    for (_i = 0, _len = _ref.length; _i < _len; _i++) {
-      cubcle = _ref[_i];
+  getNewAxis = function () {
+    let cubcle, fname, tname, i, len, ref;
+    ref = cube.children;
+    for (i = 0, len = ref.length; i < len; i++) {
+      cubcle = ref[i];
       if (findcoord(cubcle.children[0]).z < -d / 2) {
         if (cubcle.children[0].name !== "") {
           fname = cubcle.children[0].name;
@@ -548,15 +613,42 @@ function init() { //all functions within req'd for cube formation
     }
     curpos = fname;
     curor = tname;
-
   };
-  rotate = function(dir, qty) {
 
-    var c, cubcle, realaxis, _i, _j, _k, _l, _len, _len1, _len2, _len3, _len4, _len5, _len6, _len7, _m, _n, _o, _p, _q, _ref, _ref1, _ref2, _ref3, _ref4, _ref5, _ref6, _ref7;
-    //if (combine == null) {
-      combine = false;
-    //}
+  rotate = function (dir, qty) {
+    let c,
+      cubcle,
+      realaxis,
+      i,
+      j,
+      k,
+      l,
+      len,
+      len1,
+      len2,
+      len3,
+      len4,
+      len5,
+      len6,
+      len7,
+      m,
+      n,
+      o,
+      p,
+      q,
+      ref,
+      ref1,
+      ref2,
+      ref3,
+      ref4,
+      ref5,
+      ref6,
+      ref7;
+
+    combine = false;
+
     scene.updateMatrixWorld(true);
+
     if (!combine) {
       axises = [];
       position = [];
@@ -565,11 +657,10 @@ function init() { //all functions within req'd for cube formation
       cubes = [];
     }
     switch (dir) {
-
       case "b":
-        _ref = cube.children;
-        for (_i = 0, _len = _ref.length; _i < _len; _i++) {
-          cubcle = _ref[_i];
+        ref = cube.children;
+        for (i = 0, len = ref.length; i < len; i++) {
+          cubcle = ref[i];
           if (findcoord(cubcle.children[0]).z > d / 2) {
             cubes.push(cubcle);
           }
@@ -578,9 +669,9 @@ function init() { //all functions within req'd for cube formation
         defdir = getDirFromLocRot(1);
         break;
       case "f":
-        _ref1 = cube.children;
-        for (_j = 0, _len1 = _ref1.length; _j < _len1; _j++) {
-          cubcle = _ref1[_j];
+        ref1 = cube.children;
+        for (j = 0, len1 = ref1.length; j < len1; j++) {
+          cubcle = ref1[j];
           if (findcoord(cubcle.children[0]).z < -d / 2) {
             cubes.push(cubcle);
           }
@@ -589,9 +680,9 @@ function init() { //all functions within req'd for cube formation
         defdir = getDirFromLocRot(-1);
         break;
       case "u":
-        _ref2 = cube.children;
-        for (_k = 0, _len2 = _ref2.length; _k < _len2; _k++) {
-          cubcle = _ref2[_k];
+        ref2 = cube.children;
+        for (k = 0, len2 = ref2.length; k < len2; k++) {
+          cubcle = ref2[k];
           if (findcoord(cubcle.children[0]).y > d / 2) {
             cubes.push(cubcle);
           }
@@ -600,9 +691,9 @@ function init() { //all functions within req'd for cube formation
         defdir = getDirFromTopRot(-1);
         break;
       case "m":
-        _ref2 = cube.children;
-        for (_p = 0, _len2 = _ref2.length; _p < _len2; _p++) {
-          cubcle = _ref2[_p];
+        ref2 = cube.children;
+        for (p = 0, len2 = ref2.length; p < len2; p++) {
+          cubcle = ref2[p];
           if (findcoord(cubcle.children[0]).y > d / 2) {
             cubes.push(cubcle);
           }
@@ -611,9 +702,9 @@ function init() { //all functions within req'd for cube formation
         defdir = getDirFromTopRot(-1);
         break;
       case "d":
-        _ref3 = cube.children;
-        for (_l = 0, _len3 = _ref3.length; _l < _len3; _l++) {
-          cubcle = _ref3[_l];
+        ref3 = cube.children;
+        for (l = 0, len3 = ref3.length; l < len3; l++) {
+          cubcle = ref3[l];
           if (findcoord(cubcle.children[0]).y < -d / 2) {
             cubes.push(cubcle);
           }
@@ -622,9 +713,9 @@ function init() { //all functions within req'd for cube formation
         defdir = getDirFromTopRot(1);
         break;
       case "l":
-        _ref4 = cube.children;
-        for (_m = 0, _len4 = _ref4.length; _m < _len4; _m++) {
-          cubcle = _ref4[_m];
+        ref4 = cube.children;
+        for (m = 0, len4 = ref4.length; m < len4; m++) {
+          cubcle = ref4[m];
           if (findcoord(cubcle.children[0]).x > d / 2) {
             cubes.push(cubcle);
           }
@@ -633,9 +724,9 @@ function init() { //all functions within req'd for cube formation
         defdir = getDirFromRot(-1);
         break;
       case "c":
-        _ref6 = cube.children;
-        for (_n = 0, _len6 = _ref6.length; _n < _len6; _n++) {
-          cubcle = _ref6[_n];
+        ref6 = cube.children;
+        for (n = 0, len6 = ref6.length; n < len6; n++) {
+          cubcle = ref6[n];
           if (findcoord(cubcle.children[0]).x > d / 3) {
             cubes.push(cubcle);
           }
@@ -644,20 +735,20 @@ function init() { //all functions within req'd for cube formation
         defdir = getDirFromRot(-1);
         break;
       case "r":
-        _ref5 = cube.children;
-        for (_o = 0, _len5 = _ref5.length; _o < _len5; _o++) {
-          cubcle = _ref5[_o];
+        ref5 = cube.children;
+        for (o = 0, len5 = ref5.length; o < len5; o++) {
+          cubcle = ref5[o];
           if (findcoord(cubcle.children[0]).x < -d / 2) {
             cubes.push(cubcle);
           }
         }
         axis = getAxisFromRot("x");
         defdir = getDirFromRot(1);
-        break;  
+        break;
     }
     moving = true;
-    for (_q = 0, _len6 = cubes.length; _q < _len6; _q++) {
-      c = cubes[_q];
+    for (q = 0, len6 = cubes.length; q < len6; q++) {
+      c = cubes[q];
       switch (axis) {
         case "x":
           realaxis = new THREE.Vector3(1, 0, 0);
@@ -675,7 +766,7 @@ function init() { //all functions within req'd for cube formation
     time = 0;
   };
   this.rotate = rotate;
-  cshift = function(dir) {
+  cshift = function (dir) {
     lastdir = dir;
     switch (dir) {
       case "top":
@@ -699,25 +790,36 @@ function init() { //all functions within req'd for cube formation
     time = 0;
     target = de2ra(defdir * 90);
   };
+  
+  document.addEventListener('DOMContentLoaded', function(){
+	const gameContainer = document.querySelector("body .container");
 
-  $(document).ready(function() {
     scene = new THREE.Scene();
-    camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
-    renderer = new THREE.WebGLRenderer({antialias: true});
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    $("game").html('');
-    $("game").append(renderer.domElement);
     cube = makecube(scene);
-    console.log(cube);
     scene.add(cube);
-    camera.position.z = 7;
-    scene.add(directionalLight);
+    camera = new THREE.PerspectiveCamera(
+      60,
+      gameContainer.clientWidth / gameContainer.clientHeight,
+      0.1,
+      1000
+    );
+	camera.position = scene.position;
+    camera.position.z = 6;
     controls = new THREE.OrbitControls(camera);
     controls.rotateLeft(de2ra(180));
     controls.rotateUp(de2ra(20));
+    renderer = new THREE.WebGLRenderer({ antialias: true });
+    renderer.setSize(
+      gameContainer.clientWidth,
+      gameContainer.clientHeight
+    );
+
+    $("game").empty().append(renderer.domElement);
+		
     render();
-    $(document).keydown(function(e) {
-      var code, shift;
+
+    document.addEventListener("keydown", function (e) {
+      let code, shift;
       if (moving) {
         return;
       }
@@ -767,22 +869,22 @@ function init() { //all functions within req'd for cube formation
           console.log(code);
       }
     });
-    $(document).mouseup(function(e) {
 
+    document.addEventListener("mouseup", function () {
       movcam = true;
       time2 = 0;
       origincam = controls.currentRot;
 
+      targetcam = {
+        x: de2ra(180),
+        y: de2ra(70),
+      };
+
       if (origincam.x < 0) {
         origincam.x += Math.PI * 2;
       }
-
-      targetcam = {
-        x: de2ra(180),
-        y: de2ra(70)
-      };
     });
+
     return renderer;
-  
   });
-};
+}
