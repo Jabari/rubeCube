@@ -92,6 +92,21 @@ var app = angular.module('rubeCube', [])
 		top_face.style.background = 'orange';
  		cube.style.background = 'orange';
  	}
+	var rotationXcounter = 0;
+	var rotationXstep = 18;
+	var rotationYcounter = 0;
+  	var rotationYstep = 30;
+	$scope.rotateRight = function () {	
+		rotationYcounter++;
+		cube.style.transform = `rotateX(${rotationXcounter * rotationXstep}deg) 
+								rotateY(${rotationYcounter * rotationYstep}deg)`;
+  	};
+
+	$scope.rotateForward = function () {
+		rotationXcounter--;
+		cube.style.transform = `rotateX(${rotationXcounter * rotationXstep}deg) 
+								rotateY(${rotationYcounter * rotationYstep}deg)`;
+  };
 
 })
 .controller('colorGen', function($scope) {
@@ -179,7 +194,6 @@ var app = angular.module('rubeCube', [])
 
 	
  	squares = document.getElementsByClassName('square');
- 	//squares = document.querySelectorAll('.square');
  	console.log(squares);
 	$('.switch').on('click', function() {
 	  switchClass('L-clock');
@@ -215,6 +229,7 @@ var app = angular.module('rubeCube', [])
 			
 	  	});
 	}
+
 	// 
 	var movementsMap = {
         'L-clock':{

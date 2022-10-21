@@ -17,15 +17,23 @@
 	
 	<div class="container-fluid">
 		<div class="row container">
-			<div ng-app="rubeCube" class="container col-xs-12 col-md-12 cube-container" >	
-				<div ng-controller="cubeLogic">
-					<button class="button btn btn-default disabled" id="switch1">L - clockwise</button>
-					<button class="button btn btn-default disabled" id="switch2">L - counter-clockwise</button>
-					<button class="button btn btn-default disabled" ng-click="changeColor();">changeColor</button>
+			<div ng-app="rubeCube" class="container col-xs-12 col-md-12 cube-container" >
+				<!-- <div id="controls__container">
+					<div class="controls"></div>
+					<div class="controls"></div>
+					<div class="controls"></div>
+					<div class="controls"></div>
+				</div> -->
+					
+				<div ng-controller="sizeGen">
+					<button class="button btn btn-default" id="switch1" ng-click="rotateRight()">Rotate right</button>
+					<button class="button btn btn-default" id="switch2" ng-click="rotateForward()">Rotate forward</button>
+					<button class="button btn btn-default" ng-click="toggleRotation();">{{ rotatingText }}</button>
 				</div>
 				<div id="cube-viewport" ng-controller="sizeGen">
 					
-					<div id="cube" style="-webkit-transform: rotateX(-15deg) rotateY(25deg)">
+					<div id="cube" style="-webkit-transform: rotateX(-5deg) rotateY(5deg)">
+					<!-- <div id="cube"> -->
 					<!-- TOP FACE -->
 						<!-- LEFT COL -->
 						<square ng-repeat="row in square_row" class="top_face left_col color1" 				
@@ -145,22 +153,20 @@
 						</square>
 					</div><!--cube-->
 				</div><!--cube viewport-->
-				<script src="https://code.ionicframework.com/1.1.1/js/ionic.bundle.min.js"></script>
-				<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
-				<script src="js/angular-cube.js"></script>
-				<!--<script src="/js/swipe.js"></script>-->
 				<dd>
 					<dl><dt class="vanilla">Vanilla</dt> - <dd>created with HTML5 & Angular</dd></dl>
 					<br />
 					<span class="error">Currently not interactive</span>
 				</dd>
-			</div><!--ng-app=rubeCube-->
+			</div>
 			
-			<div class="container col-xs-12 col-md-12 cube-container">
+			<div class="container">
 				<game>
 				</game>
-				<button class="button btn btn-default" onclick="newCube();">new cube</button>
-				<button class="button btn btn-default" onclick="scramble();">scramble</button>
+				<div class="flex-container half-width container">
+					<button class="button btn btn-default" onclick="init();">new cube</button>
+					<button class="button btn btn-default" onclick="scramble(this);">scramble</button>
+				</div>			
 				<ul>
 					<li><dl><dt>f</dt>-<dd>front</dd></li>
 					<li><dl><dt>b</dt>-<dd>back</dd></li>
@@ -186,8 +192,10 @@
 				<br />	
 				<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 				<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r58/three.min.js"></script>
+				<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.0/angular.min.js"></script>
 				<script src="js/OrbitControls.js"></script>	
-				<script src="js/three-cube.js"></script>
+				<script src="js/angular-cube.js"></script>
+				<script src="js/cube.js"></script>
 				<dl><dt class="flavor-of-week">Flavor of the Week</dt> - <dd>created with Three.js</dd></dl>
 			</div><!--three-cube-->
 		</div><!--row-->
@@ -198,6 +206,5 @@
 		</footer>
 	</div>
 	
-	<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 </body>
 </html>
